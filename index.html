@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automobile Showroom Management System</title>
+  <meta name="description" content="A commercial-grade Automobile Showroom Management System built with HTML5, CSS3, and vanilla JavaScript featuring inventory, bookings, sales, customer management, invoice generation, and reporting.">
+  <meta property="og:title" content="Automobile Showroom Management System">
+  <meta property="og:description" content="A commercial-grade Automobile Showroom Management System built with HTML5, CSS3, and vanilla JavaScript featuring inventory, bookings, sales, customer management, invoice generation, and reporting.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 4L41 11.5V26C41 35 33.5 41 24 44C14.5 41 7 35 7 26V11.5L24 4Z' fill='%231d4ed8'/><path d='M24 8L10 14V25.5C10 32.5 15.5 37.2 24 40.2V8Z' fill='%233b82f6'/><path d='M24 8L38 14V25.5C38 32.5 32.5 37.2 24 40.2V8Z' fill='%232563eb'/><path d='M24 11.5L32 30.5H27.5L24 22L20.5 30.5H16L24 11.5Z' fill='%23ffffff'/><polygon points='24,15.5 26.2,20.8 21.8,20.8' fill='%230f172a'/><path d='M18.5 25H29.5' stroke='%23ffffff' stroke-width='1.75' stroke-linecap='round'/></svg>">
+</head>
+<body class="login-page-body">
+
+  <div style="position: fixed; top: 1.5rem; right: 1.5rem; z-index: 50;">
+    <button class="header-btn" onclick="ASMS.toggleTheme()" title="Toggle Dark/Light Mode" id="btn-theme-toggle">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+    </button>
+  </div>
+
+  <div class="login-card">
+    <div class="login-header">
+      <div class="login-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="46" height="46" fill="none" class="apex-logo-crest">
+          <defs>
+            <linearGradient id="loginGradBg" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1d4ed8"/>
+              <stop offset="0.6" stop-color="#1e40af"/>
+              <stop offset="1" stop-color="#0f172a"/>
+            </linearGradient>
+            <linearGradient id="loginWingL" x1="24" y1="6" x2="8" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#93c5fd"/>
+              <stop offset="0.5" stop-color="#3b82f6"/>
+              <stop offset="1" stop-color="#1d4ed8"/>
+            </linearGradient>
+            <linearGradient id="loginWingR" x1="24" y1="6" x2="40" y2="38" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#60a5fa"/>
+              <stop offset="0.5" stop-color="#2563eb"/>
+              <stop offset="1" stop-color="#1e3a8a"/>
+            </linearGradient>
+            <linearGradient id="loginChrome" x1="24" y1="10" x2="24" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#ffffff"/>
+              <stop offset="0.75" stop-color="#e2e8f0"/>
+              <stop offset="1" stop-color="#cbd5e1"/>
+            </linearGradient>
+            <filter id="loginGlow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="1.5" stdDeviation="2.5" flood-color="#2563eb" flood-opacity="0.35"/>
+            </filter>
+          </defs>
+          <path d="M24 4L41 11.5V26C41 35 33.5 41 24 44C14.5 41 7 35 7 26V11.5L24 4Z" fill="url(#loginGradBg)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+          <path d="M24 8L10 14V25.5C10 32.5 15.5 37.2 24 40.2V8Z" fill="url(#loginWingL)" opacity="0.95"/>
+          <path d="M24 8L38 14V25.5C38 32.5 32.5 37.2 24 40.2V8Z" fill="url(#loginWingR)"/>
+          <path d="M24 11.5L32 30.5H27.5L24 22L20.5 30.5H16L24 11.5Z" fill="url(#loginChrome)" filter="url(#loginGlow)"/>
+          <polygon points="24,15.5 26.2,20.8 21.8,20.8" fill="#0f172a" opacity="0.45"/>
+          <path d="M18.5 25H29.5" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round"/>
+          <path d="M24 5.5L39.5 12V14.5L24 8L8.5 14.5V12L24 5.5Z" fill="#ffffff" opacity="0.35"/>
+        </svg>
+      </div>
+      <h1 class="login-title">APEX MOTORS</h1>
+      <p class="login-subtitle">Automobile Showroom Management System</p>
+      <div class="login-academic-tag" title="Project Information">
+        BCA Mini Project (BCA23506) &bull; Dr P.A Inamdar University
+      </div>
+    </div>
+
+    <form class="login-form" id="login-form">
+      <div class="form-group">
+        <label class="form-label" for="username">Administrator Username</label>
+        <input type="text" id="username" class="form-control" placeholder="Enter username (e.g. admin)" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password</label>
+        <div style="position: relative;">
+          <input type="password" id="password" class="form-control" style="padding-right: 2.5rem;" placeholder="Enter password (e.g. admin123)" required autocomplete="current-password">
+          <button type="button" id="btn-toggle-pwd" style="position: absolute; right: 0.75rem; top: 50%; transform: translateY(-50%); background: none; border: none; color: #94a3b8; cursor: pointer; display: flex; align-items: center;" title="Show/Hide Password">
+            <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </button>
+        </div>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.8125rem; color: #94a3b8;">
+        <label style="display: flex; align-items: center; gap: 0.45rem; cursor: pointer;">
+          <input type="checkbox" id="remember-me" checked style="cursor: pointer;">
+          <span>Remember session</span>
+        </label>
+        <span style="color: #38bdf8; cursor: pointer;" onclick="quickFillCredentials()">Quick Demo Fill</span>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75rem; font-size: 0.95rem; margin-top: 0.5rem;" id="btn-login-submit">
+        <span>Authenticate &amp; Access Dashboard</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+      </button>
+    </form>
+
+    <div class="demo-credentials-box">
+      <div>
+        <div style="font-weight: 600; color: #ffffff; font-size: 0.78rem;">Demo Administrator Access</div>
+        <div style="margin-top: 0.15rem;">User: <code>admin</code> &nbsp;|&nbsp; Pass: <code>admin123</code></div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="quickFillCredentials()" style="background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #ffffff;">
+        Auto-Fill
+      </button>
+    </div>
+
+    <div style="text-align: center; margin-top: 1.5rem; font-size: 0.72rem; color: #64748b; line-height: 1.4;">
+      BCA Mini Project (BCA23506) &bull; Dr P.A Inamdar University &bull; 2026–27
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="./js/app.js"></script>
+  <script>
+    // Check if user is already logged in
+    document.addEventListener('DOMContentLoaded', () => {
+      ASMS.initTheme();
+      ASMS.initDatabase();
+      ASMS.checkAuth(true);
+
+      const loginForm = document.getElementById('login-form');
+      const userInput = document.getElementById('username');
+      const passInput = document.getElementById('password');
+      const pwdToggleBtn = document.getElementById('btn-toggle-pwd');
+      const eyeIcon = document.getElementById('eye-icon');
+
+      // Password visibility toggle
+      pwdToggleBtn.addEventListener('click', () => {
+        if (passInput.type === 'password') {
+          passInput.type = 'text';
+          eyeIcon.innerHTML = `<path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path><line x1="2" y1="2" x2="22" y2="22"></line>`;
+        } else {
+          passInput.type = 'password';
+          eyeIcon.innerHTML = `<path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path><circle cx="12" cy="12" r="3"></circle>`;
+        }
+      });
+
+      // Login form submission
+      loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const username = userInput.value.trim();
+        const password = passInput.value;
+
+        const result = ASMS.login(username, password);
+        if (result.success) {
+          ASMS.toast('Authentication successful! Welcome to Apex Motors.', 'success');
+          setTimeout(() => {
+            window.location.href = './dashboard.html';
+          }, 600);
+        } else {
+          ASMS.toast(result.message, 'error');
+          passInput.focus();
+        }
+      });
+
+      // Quick fill function
+      window.quickFillCredentials = function() {
+        userInput.value = 'admin';
+        passInput.value = 'admin123';
+        ASMS.toast('Filled demo admin credentials: admin / admin123', 'info');
+      };
+    });
+  </script>
+</body>
+</html>

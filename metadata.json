@@ -1,0 +1,7 @@
+{
+  "name": "Automobile Showroom Management System",
+  "description": "A commercial-grade Automobile Showroom Management System built with HTML5, CSS3, and vanilla JavaScript featuring inventory, bookings, sales, customer management, invoice generation, and reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

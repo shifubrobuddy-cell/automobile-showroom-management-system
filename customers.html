@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Management — Apex Motors ASMS</title>
+  <meta name="description" content="Automobile Showroom Customer Directory & CRM - Client records, corporate accounts, booking history, and sales transaction tracking.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 4L41 11.5V26C41 35 33.5 41 24 44C14.5 41 7 35 7 26V11.5L24 4Z' fill='%231d4ed8'/><path d='M24 8L10 14V25.5C10 32.5 15.5 37.2 24 40.2V8Z' fill='%233b82f6'/><path d='M24 8L38 14V25.5C38 32.5 32.5 37.2 24 40.2V8Z' fill='%232563eb'/><path d='M24 11.5L32 30.5H27.5L24 22L20.5 30.5H16L24 11.5Z' fill='%23ffffff'/><polygon points='24,15.5 26.2,20.8 21.8,20.8' fill='%230f172a'/><path d='M18.5 25H29.5' stroke='%23ffffff' stroke-width='1.75' stroke-linecap='round'/></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <main class="app-main">
+      <div class="page-content">
+
+        <!-- Top Stats Row -->
+        <div class="stats-grid">
+          <div class="stat-card" style="--card-accent: var(--primary);">
+            <div class="stat-info">
+              <span class="stat-label">Total Registered</span>
+              <span class="stat-value" id="stat-total-customers">0</span>
+              <span class="stat-subtext positive">Active CRM Records</span>
+            </div>
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: var(--accent-emerald);">
+            <div class="stat-info">
+              <span class="stat-label">Retail Buyers</span>
+              <span class="stat-value" id="stat-individual-customers">0</span>
+              <span class="stat-subtext">Private Car Owners</span>
+            </div>
+            <div class="stat-icon" style="--icon-bg: rgba(5, 150, 105, 0.12); --icon-color: var(--accent-emerald);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"></circle><path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: var(--accent);">
+            <div class="stat-info">
+              <span class="stat-label">Corporate Accounts</span>
+              <span class="stat-value" id="stat-corporate-customers">0</span>
+              <span class="stat-subtext">Commercial &amp; Fleet</span>
+            </div>
+            <div class="stat-icon" style="--icon-bg: rgba(2, 132, 199, 0.12); --icon-color: var(--accent);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" style="--card-accent: var(--accent-amber);">
+            <div class="stat-info">
+              <span class="stat-label">Customer Revenue</span>
+              <span class="stat-value" id="stat-total-customer-spend" style="font-size: 1.55rem; color: var(--primary);">₹ 0</span>
+              <span class="stat-subtext positive">Total Invoiced Amount</span>
+            </div>
+            <div class="stat-icon" style="--icon-bg: rgba(217, 119, 6, 0.12); --icon-color: var(--accent-amber);">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 18V6"></path></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Card with Table -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>Client &amp; Buyer Directory</span>
+              </div>
+              <div class="card-subtitle">Maintain verified customer contacts, billing addresses, and purchase records</div>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-secondary btn-sm" id="btn-export-customers">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <span>Export CSV</span>
+              </button>
+              <button class="btn btn-primary btn-sm" id="btn-add-customer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                <span>Register Customer</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body" style="padding-bottom: 0;">
+            <!-- Filter Toolbar -->
+            <div class="filter-toolbar">
+              <div class="search-input-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="search-customers" class="search-input" placeholder="Search by customer name, phone, email, or city...">
+              </div>
+
+              <div class="filter-group">
+                <select id="filter-customer-type" class="select-filter">
+                  <option value="">All Client Types</option>
+                  <option value="Individual">Individual (Retail)</option>
+                  <option value="Corporate">Corporate / Fleet</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Table -->
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer Profile &amp; ID</th>
+                  <th>Mobile Contact</th>
+                  <th>Email Address</th>
+                  <th>Account Type</th>
+                  <th>City / Address</th>
+                  <th>Registered</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="customers-table-body"></tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Footer -->
+          <div id="pagination-container" class="pagination"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Add / Edit Customer Modal -->
+  <div class="modal-overlay" id="customer-modal">
+    <div class="modal-container modal-md">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Register New Customer</div>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <form id="customer-form">
+        <div class="modal-body">
+          <input type="hidden" id="customer-id">
+
+          <div class="form-grid">
+            <div class="form-group col-span-2">
+              <label class="form-label" for="customer-name">Full Name / Company Name <span class="required">*</span></label>
+              <input type="text" id="customer-name" class="form-control" placeholder="e.g. Vikram Malhotra or TechSolutions Ltd" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customer-mobile">Contact Mobile Number <span class="required">*</span></label>
+              <input type="tel" id="customer-mobile" class="form-control" placeholder="e.g. +91 98230 45678" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customer-email">Email Address</label>
+              <input type="email" id="customer-email" class="form-control" placeholder="e.g. vikram@example.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customer-type">Account Classification <span class="required">*</span></label>
+              <select id="customer-type" class="form-control" required>
+                <option value="Individual">Individual (Retail Buyer)</option>
+                <option value="Corporate">Corporate / Commercial Fleet</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="customer-registered">Registration Date</label>
+              <input type="date" id="customer-registered" class="form-control">
+            </div>
+
+            <div class="form-group col-span-2">
+              <label class="form-label" for="customer-address">Billing &amp; Delivery Address <span class="required">*</span></label>
+              <textarea id="customer-address" class="form-control" rows="2" placeholder="e.g. Flat 402, Marvel Palms, Koregaon Park, Pune" required></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" id="modal-cancel-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-sm">Save Customer Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- View Customer Profile & History Modal -->
+  <div class="modal-overlay" id="view-customer-modal">
+    <div class="modal-container modal-lg">
+      <div class="modal-header">
+        <div class="modal-title">Client Account &amp; Transaction History</div>
+        <button class="modal-close" id="view-modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="view-customer-container"></div>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="./js/app.js"></script>
+  <script src="./js/customers.js"></script>
+</body>
+</html>

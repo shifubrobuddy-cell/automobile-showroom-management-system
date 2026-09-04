@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Reports &amp; Analytics — Apex Motors ASMS</title>
+  <meta name="description" content="Automobile Showroom Executive Reports - Inventory stock audit, customer lifetime spend, pre-orders pipeline, and sales turnover reports.">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 4L41 11.5V26C41 35 33.5 41 24 44C14.5 41 7 35 7 26V11.5L24 4Z' fill='%231d4ed8'/><path d='M24 8L10 14V25.5C10 32.5 15.5 37.2 24 40.2V8Z' fill='%233b82f6'/><path d='M24 8L38 14V25.5C38 32.5 32.5 37.2 24 40.2V8Z' fill='%232563eb'/><path d='M24 11.5L32 30.5H27.5L24 22L20.5 30.5H16L24 11.5Z' fill='%23ffffff'/><polygon points='24,15.5 26.2,20.8 21.8,20.8' fill='%230f172a'/><path d='M18.5 25H29.5' stroke='%23ffffff' stroke-width='1.75' stroke-linecap='round'/></svg>">
+</head>
+<body>
+  <div class="app-layout">
+    <main class="app-main">
+      <div class="page-content">
+
+        <!-- Report Selector Toolbar -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-body" style="padding: 1.25rem;">
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; justify-content: space-between;">
+              <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-weight: 700;">Select Report Focus</label>
+                  <select id="report-type-select" class="select-filter" style="font-size: 0.9rem; padding: 0.5rem 1rem; min-width: 240px;">
+                    <option value="sales">Sales &amp; Revenue Billing Report</option>
+                    <option value="inventory">Vehicle Stock &amp; Inventory Valuation</option>
+                    <option value="customers">Customer Accounts &amp; Demographics</option>
+                    <option value="bookings">Vehicle Pre-Orders &amp; Bookings Pipeline</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" style="font-weight: 700;">Timeframe Range</label>
+                  <select id="report-date-range" class="select-filter" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                    <option value="all">All-Time Cumulative</option>
+                    <option value="this_month">Current Billing Month</option>
+                    <option value="last_30">Past 30 Days</option>
+                    <option value="custom">Custom Date Range...</option>
+                  </select>
+                </div>
+
+                <div id="custom-date-group" style="display: none; align-items: flex-end; gap: 0.5rem;">
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" style="font-size: 0.75rem;">From Date</label>
+                    <input type="date" id="report-date-start" class="form-control" style="padding: 0.4rem 0.6rem;">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" style="font-size: 0.75rem;">To Date</label>
+                    <input type="date" id="report-date-end" class="form-control" style="padding: 0.4rem 0.6rem;">
+                  </div>
+                  <button type="button" class="btn btn-primary btn-sm" id="btn-apply-dates" style="height: 38px;">Apply</button>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-export-report">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Export CSV</span>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" id="btn-print-report">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
+                  <span>Print Formal Report</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Report Heading -->
+        <div style="margin-bottom: 1.5rem;">
+          <h2 id="report-display-title" style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); font-family: var(--font-heading); margin-bottom: 0.25rem;">
+            Sales Revenue &amp; Billing Report
+          </h2>
+          <p id="report-display-subtitle" style="font-size: 0.875rem; color: var(--text-muted);">
+            Generated on ...
+          </p>
+        </div>
+
+        <!-- Dynamic KPI Cards for Selected Report -->
+        <div class="stats-grid" id="report-kpis"></div>
+
+        <!-- Report Data Table -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead id="report-table-head"></thead>
+              <tbody id="report-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="./js/app.js"></script>
+  <script src="./js/reports.js"></script>
+</body>
+</html>
