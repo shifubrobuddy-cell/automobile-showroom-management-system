@@ -698,7 +698,7 @@ const ASMS = {
             <span class="title">BCA Mini Project (BCA23506)</span>
             <div class="meta">
               <strong>Dr P.A Inamdar University, Pune</strong><br>
-              <span>Academic Year 2026–27</span>
+              Ayan Yusuf Khan (77) &amp; Mohammad Ali Farid Sayyed (116)
             </div>
           </div>
 
@@ -856,6 +856,31 @@ const ASMS = {
                 <div style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Curriculum Specification</div>
                 <div style="font-weight: 700; color: var(--text-main); margin-top: 0.2rem;">BCA Mini Project (BCA23506)</div>
               </div>
+            </div>
+
+            <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 700;">Project Developers</h4>
+            <div style="border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 1.25rem;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+                <thead>
+                  <tr style="background: var(--bg-surface); border-bottom: 1px solid var(--border-subtle);">
+                    <th style="padding: 0.5rem 0.875rem; text-align: left;">Roll No</th>
+                    <th style="padding: 0.5rem 0.875rem; text-align: left;">Name</th>
+                    <th style="padding: 0.5rem 0.875rem; text-align: left;">Class</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--border-subtle);">
+                    <td style="padding: 0.6rem 0.875rem; font-weight: 600;">77</td>
+                    <td style="padding: 0.6rem 0.875rem; font-weight: 600; color: var(--primary);">Ayan Yusuf Khan</td>
+                    <td style="padding: 0.6rem 0.875rem;">BCA III</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.6rem 0.875rem; font-weight: 600;">116</td>
+                    <td style="padding: 0.6rem 0.875rem; font-weight: 600; color: var(--primary);">Mohammad Ali Farid Sayyed</td>
+                    <td style="padding: 0.6rem 0.875rem;">BCA III</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
 
             <h4 style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 700;">Key Features Built</h4>

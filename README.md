@@ -3,6 +3,7 @@
 
 > **BCA Mini Project (Subject Code: BCA23506) — Academic Year 2026–27**  
 > **Institute:** Dr P.A Inamdar University, Pune — School of Commerce, Management and Computer Studies  
+> **Developed by:** Ayan Yusuf Khan (Roll No: 77) & Mohammad Ali Farid Sayyed (Roll No: 116)  
 
 ---
 
